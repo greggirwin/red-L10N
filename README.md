@@ -4,6 +4,29 @@ L10N R&amp;D for Red
 I18N / G11N is the planning and architecture aspect.
 L10N is the active work of translating elements.
 
+1. What do we get from each platform to tell is the user's locale setting?
+
+2. What does our locale data model look like? This, I think, ties directly
+   to hierarchical environments, merging structures. It doesn't mean they
+   have to be physically merged into one, but there is the concept of
+   scoping when values are looked up.
+
+3. Which functions and other aspects of Red are locale sensitive?
+
+4. What does localized content look like in a script or app? That is, what
+   are the keys, do we set a locale at the top, or at runtime, and only
+   overrides are needed, and everything else is declarative, or are L10N
+   calls strewn throughout?
+   
+5. Are there standards we should or must follow? So much work has been 
+   done in this area, and there seems to be at least a rough consensus
+   on many aspects, that it makes sense to keep them in mind. But we
+   should still simplify things and make it as data oriented as possible.
+   
+
+
+
+
 # References
 
 RFC 4646
@@ -32,11 +55,13 @@ are neutral cultures.
   
 - https://unicode-org.github.io/icu/userguide/format_parse/messages/
   - https://formatjs.io/docs/core-concepts/icu-syntax/
+    - https://formatjs.io/docs/core-concepts/icu-syntax#plural-format
+    - https://formatjs.io/docs/core-concepts/icu-syntax#selectordinal-format
 - https://unicode-org.github.io/icu/userguide/locale/
 - https://unicode-org.github.io/icu/userguide/locale/resources
 - https://unicode-org.github.io/icu/userguide/datetime/
 
-- https://github.com/tc39/ecma402
+- https://tc39.es/ecma402/ comes from https://github.com/tc39/ecma402
 
 - https://formatjs.io/
 - https://formatjs.io/docs/getting-started/application-workflow
