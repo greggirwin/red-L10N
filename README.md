@@ -1,8 +1,9 @@
 # red-L10N
 L10N R&amp;D for Red
 
-I18N / G11N is the planning and architecture aspect.
+I18N is the planning and architecture aspect.
 L10N is the active work of translating elements.
+G11N is I18N + L10N
 
 1. What do we get from each platform to tell is the user's locale setting?
 
@@ -10,20 +11,36 @@ L10N is the active work of translating elements.
    to hierarchical environments, merging structures. It doesn't mean they
    have to be physically merged into one, but there is the concept of
    scoping when values are looked up.
-
+   
+   tr35> There are actually two different kinds of inheritance fallback: 
+   resource bundle lookup and resource item lookup. For the former, a
+   process is looking to find the first, best resource bundle it can;
+   for the later, it is fallback within bundles on individual items
+   
+   - https://unicode.org/reports/tr35/#Bundle_vs_Item_Lookup
+   - https://unicode.org/reports/tr35/#LanguageMatching
+   - TR35 talks about this a lot more, with examples
+     https://unicode.org/reports/tr35/#Resolved_Data_File
+     
 3. Which functions and other aspects of Red are locale sensitive?
 
 4. What does localized content look like in a script or app? That is, what
    are the keys, do we set a locale at the top, or at runtime, and only
    overrides are needed, and everything else is declarative, or are L10N
-   calls strewn throughout?
+   calls strewn throughout? This is the I18N aspect.
    
 5. Are there standards we should or must follow? So much work has been 
    done in this area, and there seems to be at least a rough consensus
    on many aspects, that it makes sense to keep them in mind. But we
    should still simplify things and make it as data oriented as possible.
    
-
+   Locale IDs are most important here, starting with the basics. unicode.org
+   has a bazillion details we won't include.
+   
+   - https://unicode.org/reports/tr35/#Canonical_Unicode_Locale_Identifiers
+   - BCP 47
+   
+6. What does our API to the L10N system look like.
 
 
 
@@ -62,7 +79,8 @@ are neutral cultures.
 - https://unicode-org.github.io/icu/userguide/datetime/
 
 - https://tc39.es/ecma402/ comes from https://github.com/tc39/ecma402
-
+  - https://tc39.es/ecma402/#normative-references
+  
 - https://formatjs.io/
 - https://formatjs.io/docs/getting-started/application-workflow
 - https://github.com/formatjs/formatjs#change-how-messages-are-formatted
@@ -126,3 +144,16 @@ are neutral cultures.
 - https://phrase.com/features/developers/
 - https://help.phrase.com/help/react-intl-simple-json
 - https://lokalise.com/blog/i18n-internationalization-l10n-localization-developer-tutorials/
+
+# Types
+
+## Numbers and Currency
+
+## Date-Time
+
+TimeZone names - IANA Time Zone Database
+
+## Strings and Messages
+
+## Units and Unit Identifiers
+
