@@ -2,8 +2,11 @@
 L10N R&amp;D for Red
 
 I18N is the planning and architecture aspect.
+
 L10N is the active work of translating elements.
+
 G11N is I18N + L10N
+
 
 1. What do we get from each platform to tell is the user's locale setting?
 
