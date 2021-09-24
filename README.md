@@ -7,6 +7,7 @@ L10N is the active work of translating elements.
 
 G11N is I18N + L10N
 
+# Questions
 
 1. What do we get from each platform to tell is the user's locale setting?
 
@@ -25,6 +26,21 @@ G11N is I18N + L10N
    - TR35 talks about this a lot more, with examples
      https://unicode.org/reports/tr35/#Resolved_Data_File
      
+   For our initial purposes, we can just do exact matching, but still
+   need to fall back to a default locale when needed. 
+   
+   Locale fallback proceeds as follows:
+
+    The variant is removed, if there is one.
+
+    The country is removed, if there is one.
+
+    The script is removed, if there is one.
+
+    The ICU default locale is examined. The same set of steps is
+    performed for the default locale.
+   
+     
 3. Which functions and other aspects of Red are locale sensitive?
 
 4. What does localized content look like in a script or app? That is, what
@@ -42,10 +58,38 @@ G11N is I18N + L10N
    
    - https://unicode.org/reports/tr35/#Canonical_Unicode_Locale_Identifiers
    - BCP 47
+   - https://unicode-org.github.io/icu/userguide/locale/resources.html
    
-6. What does our API to the L10N system look like.
+6. What does our API to the L10N system look like?
 
+7. What are the security risks in the system? How do we protect locale data
+   from being changed, potentially with executable code. The other view 
+   being, how do we ensure locale data is never itself evaluated. Think
+   compound messages, or the model many systems use where you use the L10N
+   system to get `*-formatter` objects.
 
+# Thoughts
+
+All the indirection and layering for resource bundles and APIs to access
+the elements in them can impose constraints in a useful way. But what it
+seems they really do is just complicate the fact that this is all data,
+and items need to be looked up by some kind of key.
+
+Another bit is that the ability to fall back to other locales is vital.
+A tree structure makes sense here, but that doesn't mean we have to write
+the data as nested structures. We don't want to call it inheritance, but
+that's sort of what it is.
+
+Some excecutable logic may be necessary, but I don't *think* we want to
+think in terms of `formatter` objects. We want a general formatting system
+that dovetails nicely with the data model, to reduce friction and make data
+clear and easily separated. That said, not every app needs complete L10N
+throughout. 
+
+The plurals aspect in the standards all seem to think in terms of integers.
+There is no concept of time ranges, for relative times.It seems like
+https://tc39.es/ecma402/#relativetimeformat-objects should address it, but
+they've hidden any useful details in a morass of "let x be y" statements.
 
 # References
 
